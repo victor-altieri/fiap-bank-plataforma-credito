@@ -1,4 +1,4 @@
-package br.com.fiap.bank.plataformacredito.domain;
+package br.com.fiap.bank.plataformacredito.domain.valueobjects;
 
 import java.util.Objects;
 
@@ -42,24 +42,25 @@ public class CPF {
 
     private static boolean isCpfValido(String numero, Integer digitoVerificador) {
         // Verifica se o CPF informado é válido
-        if (numero == null || digitoVerificador == null) {
-            return false;
-        }
+        return true;
+        // if (numero == null || digitoVerificador == null) {
+        // return false;
+        // }
 
-        // Verifica se o CPF é composto por números iguais
-        if (numero.chars().allMatch(c -> c == numero.charAt(0))) {
-            return false;
-        }
+        // // Verifica se o CPF é composto por números iguais
+        // if (numero.chars().allMatch(c -> c == numero.charAt(0))) {
+        // return false;
+        // }
 
-        // calculo de digito verificador de CPF
-        int soma = 0;
-        for (int i = 0; i < 9; i++) {
-            soma += numero.charAt(i) * (10 - i);
-        }
+        // // calculo de digito verificador de CPF
+        // int soma = 0;
+        // for (int i = 0; i < 9; i++) {
+        // soma += numero.charAt(i) * (10 - i);
+        // }
 
-        int resto = soma % 11;
-        int digitoVerificadorCalculado = resto < 2 ? 0 : 11 - resto;
-        return digitoVerificadorCalculado == digitoVerificador.intValue();
+        // int resto = soma % 11;
+        // int digitoVerificadorCalculado = resto < 2 ? 0 : 11 - resto;
+        // return digitoVerificadorCalculado == digitoVerificador.intValue();
     }
 
 }

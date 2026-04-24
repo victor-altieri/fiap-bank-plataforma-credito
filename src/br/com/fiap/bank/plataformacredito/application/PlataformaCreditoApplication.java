@@ -3,9 +3,9 @@ package br.com.fiap.bank.plataformacredito.application;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import br.com.fiap.bank.plataformacredito.domain.CPF;
-import br.com.fiap.bank.plataformacredito.domain.Cliente;
-import br.com.fiap.bank.plataformacredito.domain.Proposta;
+import br.com.fiap.bank.plataformacredito.domain.entidades.Cliente;
+import br.com.fiap.bank.plataformacredito.domain.entidades.Proposta;
+import br.com.fiap.bank.plataformacredito.domain.valueobjects.CPF;
 
 public class PlataformaCreditoApplication {
 
