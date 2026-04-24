@@ -1,4 +1,4 @@
-package br.com.fiap.bank.plataformacredito.domain;
+package br.com.fiap.bank.plataformacredito.domain.entidades;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
