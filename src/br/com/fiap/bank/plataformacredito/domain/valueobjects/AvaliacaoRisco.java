@@ -1,4 +1,4 @@
-package br.com.fiap.bank.plataformacredito.domain;
+package br.com.fiap.bank.plataformacredito.domain.valueobjects;
 
 import java.util.Objects;
 

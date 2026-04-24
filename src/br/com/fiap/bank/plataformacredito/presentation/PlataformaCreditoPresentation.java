@@ -9,12 +9,17 @@ public class PlataformaCreditoPresentation {
 
     private final PlataformaCreditoApplication plataformaCreditoApplication;
 
+    private static PlataformaCreditoPresentation instancia;
+
     private PlataformaCreditoPresentation(PlataformaCreditoApplication plataformaCreditoApplication) {
         this.plataformaCreditoApplication = plataformaCreditoApplication;
     }
 
     public static PlataformaCreditoPresentation novaInstancia() {
-        return new PlataformaCreditoPresentation(new PlataformaCreditoApplication());
+        if (instancia == null) {
+            instancia = new PlataformaCreditoPresentation(PlataformaCreditoApplication.novaInstancia());
+        }
+        return instancia;
     }
 
     public void iniciar() {
