@@ -37,30 +37,46 @@ public class CNPJ {
 
     @Override
     public String toString() {
-        return String.format("%d-%d", numero, digitoVerificador);
+        return String.format(
+                "%s.%s.%s/%s-%s",
+                numero.substring(0, 2),
+                numero.substring(2, 5),
+                numero.substring(5, 8),
+                numero.substring(8, 12),
+                digitoVerificador);
     }
 
     private static boolean isCnpjValido(String numero, Integer digitoVerificador) {
-        // Verifica se o CPF informado é válido
-        return true;
-        // if (numero == null || digitoVerificador == null) {
-        // return false;
-        // }
+        if (numero == null || digitoVerificador == null) {
+            return false;
+        }
 
-        // // Verifica se o CPF é composto por números iguais
-        // if (numero.chars().allMatch(c -> c == numero.charAt(0))) {
-        // return false;
-        // }
+        String cnpj = numero + digitoVerificador;
+        if (cnpj.length() != 14) {
+            return false;
+        }
 
-        // // calculo de digito verificador de CPF
-        // int soma = 0;
-        // for (int i = 0; i < 9; i++) {
-        // soma += numero.charAt(i) * (10 - i);
-        // }
+        // Cálculo do primeiro dígito verificador
+        int soma = 0;
+        int peso = 5;
+        for (int i = 0; i < 12; i++) {
+            soma += (cnpj.charAt(i) - '0') * peso;
+            peso = (peso == 2) ? 9 : peso - 1;
+        }
+        int resto = soma % 11;
+        char digito13 = (resto < 2) ? '0' : (char) ((11 - resto) + '0');
 
-        // int resto = soma % 11;
-        // int digitoVerificadorCalculado = resto < 2 ? 0 : 11 - resto;
-        // return digitoVerificadorCalculado == digitoVerificador.intValue();
+        // Cálculo do segundo dígito verificador
+        soma = 0;
+        peso = 6;
+        for (int i = 0; i < 13; i++) {
+            soma += (cnpj.charAt(i) - '0') * peso;
+            peso = (peso == 2) ? 9 : peso - 1;
+        }
+        resto = soma % 11;
+        char digito14 = (resto < 2) ? '0' : (char) ((11 - resto) + '0');
+
+        return digito13 == cnpj.charAt(12) && digito14 == cnpj.charAt(13);
     }
 
 }
