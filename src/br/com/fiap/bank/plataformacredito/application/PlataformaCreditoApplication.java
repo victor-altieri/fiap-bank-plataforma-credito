@@ -1,12 +1,7 @@
 package br.com.fiap.bank.plataformacredito.application;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 import br.com.fiap.bank.plataformacredito.domain.entidades.Cliente;
-import br.com.fiap.bank.plataformacredito.domain.entidades.Proposta;
-import br.com.fiap.bank.plataformacredito.domain.valueobjects.CPF;
-import br.com.fiap.bank.plataformacredito.util.ClienteFactory;
+import br.com.fiap.bank.plataformacredito.domain.factory.ClienteFactory;
 
 public class PlataformaCreditoApplication {
 
@@ -30,8 +25,9 @@ public class PlataformaCreditoApplication {
         String numeroCpf = splittedCpf[0];
         Integer digitoVerificador = Integer.valueOf(splittedCpf[1]);
         Cliente clientePessoaFisica = ClienteFactory.criarClientePessoaFisica(nome, dataNascimento, numeroCpf, null);
-        Cliente clientePessoaJuridica = ClienteFactory.criarClientePessoaJuridica(nome, dataNascimento, numeroCpf,
-                null);
+        // Cliente clientePessoaJuridica =
+        // ClienteFactory.criarClientePessoaJuridica(nome, dataNascimento, numeroCpf,
+        // null);
     }
 
 }

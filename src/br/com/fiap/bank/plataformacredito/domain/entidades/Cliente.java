@@ -1,24 +1,17 @@
 package br.com.fiap.bank.plataformacredito.domain.entidades;
 
-import java.util.UUID;
-
 import br.com.fiap.bank.plataformacredito.domain.valueobjects.AvaliacaoRisco;
 
-public class Cliente {
-    private final UUID id;
+public abstract class Cliente extends BaseEntity {
     private final Conta conta;
     private AvaliacaoRisco avaliacaoRisco;
 
     public Cliente(Conta conta) {
-        this.id = UUID.randomUUID();
+        super();
         this.conta = conta;
     }
 
     // Getters
-    public UUID getId() {
-        return id;
-    }
-
     public Conta getConta() {
         return conta;
     }

@@ -2,48 +2,35 @@ package br.com.fiap.bank.plataformacredito.domain.entidades;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
-public class Proposta {
-
-    public static final String STATUS_PENDENTE = "PENDENTE";
-    public static final String STATUS_APROVADA = "APROVADA";
-    public static final String STATUS_REJEITADA = "REJEITADA";
-    public static final String STATUS_CANCELADA = "CANCELADA";
+public class Proposta extends BaseEntity {
 
     private final static Integer DIAS_VALIDADE_PADRAO_PROPOSTA = 7;
 
-    private final UUID id;
     private final Cliente cliente;
 
     private String codigo;
-    private String status;
+    private StatusProposta status;
     private BigDecimal valorSolicitado;
     private Integer quantidadeParcelas;
-    private LocalDate dataCriacao;
     private LocalDate dataValidade;
     private String motivoRejeicao;
 
     public Proposta(String codigo, BigDecimal valorSolicitado, Integer quantidadeParcelas, Cliente cliente) {
-        this.id = UUID.randomUUID();
+        super();
         this.codigo = codigo;
         this.valorSolicitado = valorSolicitado;
         this.quantidadeParcelas = quantidadeParcelas;
         this.cliente = cliente;
-        this.dataCriacao = LocalDate.now();
         this.dataValidade = this.dataCriacao.plusDays(DIAS_VALIDADE_PADRAO_PROPOSTA);
-        this.status = "PENDENTE";
-    }
-
-    public UUID getId() {
-        return id;
+        this.status = StatusProposta.PENDENTE;
     }
 
     public String getCodigo() {
         return codigo;
     }
 
-    public String getStatus() {
+    public StatusProposta getStatus() {
         return status;
     }
 
@@ -53,10 +40,6 @@ public class Proposta {
 
     public Integer getQuantidadeParcelas() {
         return quantidadeParcelas;
-    }
-
-    public LocalDate getDataCriacao() {
-        return dataCriacao;
     }
 
     public LocalDate getDataValidade() {
@@ -72,16 +55,16 @@ public class Proposta {
     }
 
     public void aprovar() {
-        this.status = STATUS_APROVADA;
+        this.status = StatusProposta.APROVADA;
     }
 
     public void rejeitar(String motivo) {
-        this.status = STATUS_REJEITADA;
+        this.status = StatusProposta.REJEITADA;
         this.motivoRejeicao = motivo;
     }
 
     public void cancelar() {
-        this.status = STATUS_CANCELADA;
+        this.status = StatusProposta.CANCELADA;
     }
 
 }
