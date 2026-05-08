@@ -9,19 +9,19 @@ import br.com.fiap.bank.plataformacredito.application.PlataformaCreditoApplicati
 import br.com.fiap.bank.plataformacredito.presentation.view.PropostaPessoaFisicaViewer;
 import br.com.fiap.bank.plataformacredito.presentation.view.PropostaPessoaJuridicaViewer;
 
-public class PlataformaCreditoPresentation {
+public class PlataformaCreditoController {
 
     private final PlataformaCreditoApplication plataformaCreditoApplication;
 
-    private static PlataformaCreditoPresentation instancia;
+    private static PlataformaCreditoController instancia;
 
-    private PlataformaCreditoPresentation(PlataformaCreditoApplication plataformaCreditoApplication) {
+    private PlataformaCreditoController(PlataformaCreditoApplication plataformaCreditoApplication) {
         this.plataformaCreditoApplication = plataformaCreditoApplication;
     }
 
-    public static PlataformaCreditoPresentation novaInstancia() {
+    public static PlataformaCreditoController novaInstancia() {
         if (instancia == null) {
-            instancia = new PlataformaCreditoPresentation(PlataformaCreditoApplication.novaInstancia());
+            instancia = new PlataformaCreditoController(PlataformaCreditoApplication.novaInstancia());
         }
         return instancia;
     }
