@@ -1,0 +1,165 @@
+classDiagram
+
+    class BaseEntity {
+        <<abstract>>
+        #UUID id
+        #LocalDate dataCriacao
+        #LocalDate dataAtualizacao
+        +BaseEntity()
+        +getId() UUID
+        +getDataCriacao() LocalDate
+        +getDataAtualizacao() LocalDate
+        +setDataAtualizacao(LocalDate dataAtualizacao) void
+    }
+
+    class Documento {
+        <<abstract>>
+        #String numero
+        #Integer digitoVerificador
+        +Documento(String numero, Integer digitoVerificador)
+        +getNumero() String
+        +getDigitoVerificador() Integer
+        #validar()* Boolean
+    }
+
+    class StatusProposta {
+        <<enumeration>>
+        PENDENTE
+        APROVADA
+        REJEITADA
+        CANCELADA
+    }
+
+    class Cliente {
+        <<abstract>>
+        #Conta conta
+        #Documento documento
+        #AvaliacaoRisco avaliacaoRisco
+        +Cliente(Documento documento, Conta conta)
+        +getConta() Conta
+        +getDocumento() Documento
+        +getAvaliacaoRisco() AvaliacaoRisco
+        +atribuirAvaliacaoRisco(Integer scoreCredito, String nivelEndividamentoSCR, Boolean possuiHistoricoInadimplencia) void
+    }
+
+    class ClientePessoaFisica {
+        -String nome
+        -LocalDate dataNascimento
+        +ClientePessoaFisica(String nome, LocalDate dataNascimento, Documento documento, Conta conta)
+        +getNome() String
+        +getDataNascimento() LocalDate
+    }
+
+    class ClientePessoaJuridica {
+        -String nomeFantasia
+        -String razaoSocial
+        -LocalDate dataConstituicao
+        +ClientePessoaJuridica(String nomeFantasia, String razaoSocial, LocalDate dataConstituicao, Documento documento, Conta conta)
+        +getNomeFantasia() String
+        +getRazaoSocial() String
+        +getDataConstituicao() LocalDate
+    }
+
+    class Conta {
+        -String agencia
+        -String numero
+        -String digito
+        -LocalDate dataAbertura
+        -BigDecimal saldo
+        +Conta(String agencia, String numero, String digito, LocalDate dataAbertura)
+        +getAgencia() String
+        +getNumero() String
+        +getDigito() String
+        +getDataAbertura() LocalDate
+        +getSaldo() BigDecimal
+    }
+
+    class AvaliacaoRisco {
+        -Integer scoreCredito
+        -String nivelEndividamentoSCR
+        -Boolean possuiHistoricoInadimplencia
+        +AvaliacaoRisco(Integer scoreCredito, String nivelEndividamentoSCR, Boolean possuiHistoricoInadimplencia)
+        +getScoreCredito() Integer
+        +getNivelEndividamentoSCR() String
+        +getPossuiHistoricoInadimplencia() Boolean
+    }
+
+    class CPF {
+        +CPF(String numero, Integer digitoVerificador)
+        #validar() Boolean
+    }
+
+    class CNPJ {
+        +CNPJ(String numero, Integer digitoVerificador)
+        #validar() Boolean
+    }
+
+    class Proposta {
+        -Cliente cliente
+        -String codigo
+        -StatusProposta status
+        -BigDecimal valorSolicitado
+        -Integer quantidadeParcelas
+        -LocalDate dataValidade
+        -String motivoRejeicao
+        +Proposta(String codigo, BigDecimal valorSolicitado, Integer quantidadeParcelas, Cliente cliente)
+        +getCodigo() String
+        +getStatus() StatusProposta
+        +getValorSolicitado() BigDecimal
+        +getQuantidadeParcelas() Integer
+        +getDataValidade() LocalDate
+        +getMotivoRejeicao() String
+        +getCliente() Cliente
+        +aprovar() void
+        +rejeitar(String motivo) void
+        +cancelar() void
+    }
+
+    class ClienteFactory {
+        +novoCpf(String numero, Integer digitoVerificador)$ CPF
+        +novoCnpj(String numero, Integer digitoVerificador)$ CNPJ
+        +novoClientePessoaFisica(String nome, LocalDate dataNascimento, CPF cpf, Conta conta)$ Cliente
+        +novoClientePessoaJuridica(String nomeFantasia, String razaoSocial, LocalDate dataConstituicao, CNPJ cnpj, Conta conta)$ Cliente
+    }
+
+    class ContaFactory {
+        +novaContaCorrente(String agencia, String numero, String digito, LocalDate dataAbertura)$ Conta
+    }
+
+    class PlataformaCreditoApplication {
+        -PlataformaCreditoApplication instancia$
+        +novaInstancia()$ PlataformaCreditoApplication
+        +criarProposta(String codigo, String nome, String dataNascimento, String cpf, String valorSolicitado, String quantidadeParcelas) void
+    }
+
+    class PlataformaCreditoPresentation {
+        -PlataformaCreditoPresentation instancia$
+        -PlataformaCreditoApplication plataformaCreditoApplication
+        +novaInstancia()$ PlataformaCreditoPresentation
+        +iniciar() void
+        -criarProposta(Scanner input) void
+    }
+
+    %% Relacionamentos
+    BaseEntity <|-- Cliente : Herança
+    BaseEntity <|-- Conta : Herança
+    BaseEntity <|-- Proposta : Herança
+    
+    Documento <|-- CPF : Herança
+    Documento <|-- CNPJ : Herança
+
+    Cliente <|-- ClientePessoaFisica : Herança
+    Cliente <|-- ClientePessoaJuridica : Herança
+    
+    Cliente "1" *-- "1" Conta : Possui
+    Cliente "1" *-- "1" Documento : Possui
+    Cliente "1" *-- "0..1" AvaliacaoRisco : Possui
+    
+    Proposta "*" o-- "1" Cliente : Associada a
+    Proposta --> StatusProposta : Tem
+    
+    PlataformaCreditoPresentation --> PlataformaCreditoApplication : Usa
+    PlataformaCreditoApplication ..> ClienteFactory : Usa
+    PlataformaCreditoApplication ..> ContaFactory : Usa
+    ClienteFactory ..> ClientePessoaFisica : Cria
+    ClienteFactory ..> ClientePessoaJuridica : Cria
