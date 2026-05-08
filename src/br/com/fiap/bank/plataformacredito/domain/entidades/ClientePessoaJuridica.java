@@ -2,21 +2,20 @@ package br.com.fiap.bank.plataformacredito.domain.entidades;
 
 import java.time.LocalDate;
 
-import br.com.fiap.bank.plataformacredito.domain.valueobjects.CNPJ;
+import br.com.fiap.bank.plataformacredito.domain.valueobjects.Documento;
 
 public final class ClientePessoaJuridica extends Cliente {
     private final String nomeFantasia;
     private final String razaoSocial;
     private final LocalDate dataConstituicao;
-    private final CNPJ cnpj;
 
-    public ClientePessoaJuridica(String nomeFantasia, String razaoSocial, LocalDate dataConstituicao, CNPJ cnpj,
+    public ClientePessoaJuridica(String nomeFantasia, String razaoSocial, LocalDate dataConstituicao,
+            Documento documento,
             Conta conta) {
-        super(conta);
+        super(documento, conta);
         this.nomeFantasia = nomeFantasia;
         this.razaoSocial = razaoSocial;
         this.dataConstituicao = dataConstituicao;
-        this.cnpj = cnpj;
     }
 
     public String getNomeFantasia() {
@@ -29,10 +28,6 @@ public final class ClientePessoaJuridica extends Cliente {
 
     public LocalDate getDataConstituicao() {
         return dataConstituicao;
-    }
-
-    public CNPJ getCnpj() {
-        return cnpj;
     }
 
 }

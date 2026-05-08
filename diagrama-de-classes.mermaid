@@ -6,6 +6,14 @@ classDiagram
         -LocalDate dataAtualizacao
     }
 
+    class Documento {
+        -String numero
+        -Integer digitoVerificador
+        +Documento(String numero, Integer digitoVerificador)
+        +getNumero() String
+        +getDigitoVerificador() Integer
+    }
+
     class Cliente {
         -Conta conta
         -AvaliacaoRisco avaliacaoRisco
