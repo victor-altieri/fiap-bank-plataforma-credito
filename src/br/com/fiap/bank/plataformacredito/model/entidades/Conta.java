@@ -1,10 +1,10 @@
-package br.com.fiap.bank.plataformacredito.domain.entidades;
+package br.com.fiap.bank.plataformacredito.model.entidades;
 
 import java.time.LocalDate;
 import java.util.Currency;
 import java.util.UUID;
 
-import br.com.fiap.bank.plataformacredito.domain.valueobjects.TipoContaEnum;
+import br.com.fiap.bank.plataformacredito.model.valueobjects.TipoContaEnum;
 
 public class Conta {
     private final UUID id;

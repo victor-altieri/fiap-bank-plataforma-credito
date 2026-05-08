@@ -2,8 +2,8 @@ package br.com.fiap.bank.plataformacredito.util;
 
 import java.time.LocalDate;
 
-import br.com.fiap.bank.plataformacredito.domain.entidades.Conta;
-import br.com.fiap.bank.plataformacredito.domain.valueobjects.TipoContaEnum;
+import br.com.fiap.bank.plataformacredito.model.entidades.Conta;
+import br.com.fiap.bank.plataformacredito.model.valueobjects.TipoContaEnum;
 
 public final class ContaFactory {
 

@@ -6,8 +6,8 @@ import static br.com.fiap.bank.plataformacredito.util.ContaFactory.novaContaCorr
 
 import java.time.LocalDate;
 
-import br.com.fiap.bank.plataformacredito.domain.entidades.Cliente;
-import br.com.fiap.bank.plataformacredito.domain.entidades.Conta;
+import br.com.fiap.bank.plataformacredito.model.entidades.Cliente;
+import br.com.fiap.bank.plataformacredito.model.entidades.Conta;
 
 public class PlataformaCreditoApplication {
 
