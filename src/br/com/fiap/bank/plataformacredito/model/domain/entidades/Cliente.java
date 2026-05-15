@@ -13,7 +13,6 @@ public abstract class Cliente extends BaseEntity {
         if (documento == null || conta == null) {
             throw new CriacaoClienteException("Cliente não pode ser criado com documento ou conta nula");
         }
-
         this.conta = conta;
         this.documento = documento;
     }
