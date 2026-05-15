@@ -1,7 +1,6 @@
 package br.com.fiap.bank.plataformacredito.model.domain.entidades;
 
-import br.com.fiap.bank.plataformacredito.model.domain.exception.ContaInvalidaException;
-import br.com.fiap.bank.plataformacredito.model.domain.exception.DocumentoInvalidoException;
+import br.com.fiap.bank.plataformacredito.model.domain.exception.CriacaoClienteException;
 import br.com.fiap.bank.plataformacredito.model.domain.valueobjects.Documento;
 
 public abstract class Cliente extends BaseEntity {
@@ -11,12 +10,8 @@ public abstract class Cliente extends BaseEntity {
 
     public Cliente(Documento documento, Conta conta) {
         super();
-        if (documento == null) {
-            throw new DocumentoInvalidoException("Documento não pode ser nulo");
-        }
-
-        if (conta == null) {
-            throw new ContaInvalidaException("Conta não pode ser nula");
+        if (documento == null || conta == null) {
+            throw new CriacaoClienteException("Cliente não pode ser criado com documento ou conta nula");
         }
 
         this.conta = conta;

@@ -18,8 +18,24 @@ public class Conta extends BaseEntity {
     public Conta(String agencia, String numero, String digito, LocalDate dataAbertura, TipoContaEnum tipoConta) {
         super();
 
-        if (agencia == null || numero == null || digito == null || dataAbertura == null) {
-            throw new ContaInvalidaException("Agência, número, dígito e data de abertura não podem ser nulos");
+        if (agencia == null) {
+            throw new ContaInvalidaException("Agência não pode ser nula");
+        }
+
+        if (numero == null) {
+            throw new ContaInvalidaException("Número não pode ser nulo");
+        }
+
+        if (digito == null) {
+            throw new ContaInvalidaException("Dígito não pode ser nulo");
+        }
+
+        if (dataAbertura == null) {
+            throw new ContaInvalidaException("Data de abertura não pode ser nula");
+        }
+
+        if (tipoConta == null) {
+            throw new ContaInvalidaException("Tipo de conta não pode ser nulo");
         }
 
         this.agencia = agencia;
