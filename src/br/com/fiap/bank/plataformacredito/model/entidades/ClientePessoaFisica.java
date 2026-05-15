@@ -2,7 +2,6 @@ package br.com.fiap.bank.plataformacredito.model.entidades;
 
 import java.time.LocalDate;
 
-import br.com.fiap.bank.plataformacredito.model.valueobjects.AvaliacaoRisco;
 import br.com.fiap.bank.plataformacredito.model.valueobjects.Documento;
 
 public final class ClientePessoaFisica extends Cliente {
