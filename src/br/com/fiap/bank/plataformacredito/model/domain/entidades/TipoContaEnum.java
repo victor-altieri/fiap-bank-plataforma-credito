@@ -1,4 +1,4 @@
-package br.com.fiap.bank.plataformacredito.model.valueobjects;
+package br.com.fiap.bank.plataformacredito.model.domain.entidades;
 
 public enum TipoContaEnum {
     CONTA_CORRENTE,
