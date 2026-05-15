@@ -28,28 +28,33 @@ public class PlataformaCreditoController {
 
     public void iniciar() {
         System.out.println("Bem-vindo ao sistema de plataforma de crédito!");
-        System.out.println("1 - Criar proposta Pessoa Física");
-        System.out.println("2 - Criar proposta Pessoa Física");
-        System.out.println("3 - Sair");
-        System.out.print("Digite sua opção: ");
 
         Scanner input = new Scanner(System.in);
-        int opcao = input.nextInt();
+        int opcao;
 
-        switch (opcao) {
-            case 1:
-                criarPropostaPessoaFisica(input);
-                break;
-            case 2:
-                criarPropostaPessoaJuridica(input);
-                break;
-            case 3:
-                System.out.println("Até logo!");
-                break;
-            default:
-                System.out.println("Opção inválida!");
-                iniciar();
-        }
+        do {
+            System.out.println("1 - Criar proposta Pessoa Física");
+            System.out.println("2 - Criar proposta Pessoa Física");
+            System.out.println("3 - Sair");
+            System.out.print("Digite sua opção: ");
+
+            opcao = input.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    criarPropostaPessoaFisica(input);
+                    break;
+                case 2:
+                    criarPropostaPessoaJuridica(input);
+                    break;
+                case 3:
+                    System.out.println("Até logo!");
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+                    iniciar();
+            }
+        } while (opcao < 1 || opcao > 3);
         input.close();
     }
 
